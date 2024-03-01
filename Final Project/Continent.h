@@ -1,19 +1,30 @@
-#pragma once
+#ifndef CONTINENT_H_
+#define CONTINENT_H_
+
+#include <vector>
+#include <string>
 #include "Country.h"
 
-class Continent{
+
+class Country;
+//prevent circular dependency
+
+
+class Continent {
 private:
-	std::string name;
-	int bonusArmies;
-	std::vector<Country*> countries;
-
+    int worth;
+    std::string name;
+    std::vector<Country*> countries;
 public:
+    Continent(int);
+    Continent(int, std::string);
+    Continent(int, std::string, std::vector<Country*>);
 
-	Continent();
-	Continent(std::string name, int bonusArmies);
-	std::string getName() const;
-	int getBonusArmies() const;
-	void addCountry(Country* country);
-	std::vector<Country*>& getCountries();
-
+    void addCountry(Country*);
+    std::vector<Country*> getCountries();
+    std::string getName();
+    int getWorth();
+    std::string getOwner();
 };
+
+#endif

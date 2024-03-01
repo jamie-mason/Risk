@@ -1,20 +1,40 @@
-#pragma once
-#include "Continent.h"
-class Map {
-private:
-	std::string name;
-	std::vector<Continent> continents;
-	std::vector<Country*> countries;
+#ifndef MAP_H_
+#define MAP_H_
 
+#include <string>
+#include <iostream>
+#include <vector>
+#include "Player.h"
+#include "Subject.h"
+#include "Country.h"
+#include "Continent.h"
+
+class Player;
+class Continent;
+class Country;
+class Subject;
+//prevent circular dependency
+
+
+class Map {
+
+private:
+	std::vector<Country*> countries;
+	std::vector<Continent*> continents;
 public:
 	Map();
-	Map(std::string name);
-	std::string getName() const;
-	std::vector<Continent>& getContinents();
-	std::vector<Country*>& getCountries();
-	void setContinents();
-	void connectCountries(Country* country1, Country* country2);
-	
+	Map(std::vector<Country*>);
+	Map(std::vector<Country*>, std::vector<Continent*>);
+	~Map();
 
-
+	std::vector<Country*> getCountries();
+	std::vector<Continent*> getContinents();
+	void addCountry(Country*);
+	void addContinent(Continent*);
+	bool verifyCountriesAreConnected();
+	bool verifyContinentsAreConnected();
+	bool verifyCountriesBelongToOneContinent();
+	bool isMapValid();
 };
+
+#endif

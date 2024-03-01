@@ -127,16 +127,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Attack.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="Continent.cpp" />
     <ClCompile Include="Country.cpp" />
+    <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Dice.cpp" />
+    <ClCompile Include="DiceRollingPlace.cpp" />
     <ClCompile Include="Final Project.cpp" />
+    <ClCompile Include="Fortification.cpp" />
+    <ClCompile Include="Hand.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapLoader.cpp" />
+    <ClCompile Include="Phase.cpp" />
+    <ClCompile Include="PhaseObserver.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Subject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Attack.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="Continent.h" />
     <ClInclude Include="Country.h" />
-    <ClInclude Include="IncludedDirectories.h" />
+    <ClInclude Include="Deck.h" />
+    <ClInclude Include="Dice.h" />
+    <ClInclude Include="DiceRollingPlace.h" />
+    <ClInclude Include="Fortification.h" />
+    <ClInclude Include="Hand.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapLoader.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="Phase.h" />
+    <ClInclude Include="PhaseObserver.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Subject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MapLoaderFileTest.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
