@@ -76,6 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -104,6 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Common.cpp" />
     <ClCompile Include="Continent.cpp" />
     <ClCompile Include="Country.cpp" />
     <ClCompile Include="Deck.cpp" />
@@ -136,30 +139,44 @@
     <ClCompile Include="DiceRollingPlace.cpp" />
     <ClCompile Include="Final Project.cpp" />
     <ClCompile Include="Fortification.cpp" />
+    <ClCompile Include="GameStatsObserver.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="Human.cpp" />
+    <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="MainLoop.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapLoader.cpp" />
     <ClCompile Include="Phase.cpp" />
     <ClCompile Include="PhaseObserver.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Reinforcement.cpp" />
+    <ClCompile Include="Startup.cpp" />
     <ClCompile Include="Subject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Attack.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Common.h" />
     <ClInclude Include="Continent.h" />
     <ClInclude Include="Country.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Dice.h" />
     <ClInclude Include="DiceRollingPlace.h" />
+    <ClInclude Include="FindProjectName.h" />
     <ClInclude Include="Fortification.h" />
+    <ClInclude Include="GameStatsObserver.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="Human.h" />
+    <ClInclude Include="Initialization.h" />
+    <ClInclude Include="MainLoop.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapLoader.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Phase.h" />
     <ClInclude Include="PhaseObserver.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Reinforcement.h" />
+    <ClInclude Include="Startup.h" />
     <ClInclude Include="Subject.h" />
   </ItemGroup>
   <ItemGroup>

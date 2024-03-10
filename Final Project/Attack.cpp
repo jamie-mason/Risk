@@ -408,5 +408,5 @@ void Attack::attack(Deck* currDeck, Player* player, Country* sourceCountry, Coun
 
 // Function to notify the observer about an attack
 void Attack::notifyObserver(Player* player, std::string message) {
-    Phase::notify(player, "Attack", message);
+    notify(player, "Attack", message);
 }

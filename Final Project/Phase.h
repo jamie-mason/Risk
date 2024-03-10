@@ -3,9 +3,7 @@
 
 #include "Subject.h"
 #include "PhaseObserver.h"
-#include "Player.h"
 
-class Player;
 class Subject;
 class PhaseObserver;
 //prevent circular dependency

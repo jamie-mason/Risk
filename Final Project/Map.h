@@ -5,14 +5,12 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
-#include "Subject.h"
 #include "Country.h"
 #include "Continent.h"
 
 class Player;
 class Continent;
 class Country;
-class Subject;
 //prevent circular dependency
 
 

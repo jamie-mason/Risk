@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 #include "MapLoader.h"
+#include <filesystem> // For directory operations
+
 
 MapLoader::MapLoader() {
     loadedMap = new Map(); // Initialize loadedMap pointer with a new Map object

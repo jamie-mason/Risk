@@ -1,5 +1,4 @@
 #include "DiceRollingPlace.h" // Include the declaration of DiceRollingPlace class
-#include <string> // Include string library for std::string
 
 void DiceRollingPlace::registerResult(int result) { // Method to register the result of a dice roll
     diceRollHistory[result - 1]++; // Increment the count of the corresponding dice roll result

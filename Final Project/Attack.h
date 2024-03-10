@@ -1,18 +1,16 @@
+#pragma once
 #ifndef ATTACK_H_
 #define ATTACK_H_
 //header gaurds
 
-#include "Player.h"            // Include necessary header files
-#include "Deck.h"
+// Include necessary header files
 #include "Phase.h"
 
 
-class Player;
-class Deck;
 class Phase;
 //prevent circular dependency
 
-class Attack {           // Define the Attack class inheriting from Phase
+class Attack : public Phase {           // Define the Attack class inheriting from Phase
 
 private:
     int numberOfCountriesConquered;     // Variable to track the number of countries conquered

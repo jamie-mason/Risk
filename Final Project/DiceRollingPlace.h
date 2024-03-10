@@ -4,6 +4,7 @@
 #include "Dice.h" // Include the declaration of Dice class
 #include <iostream> // Include input/output stream library
 #include <vector> // Include vector library for std::vector
+#include <string> // Include string library for std::string
 
 class DiceRollingPlace {
 public:

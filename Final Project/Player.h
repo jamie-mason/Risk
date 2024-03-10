@@ -10,16 +10,16 @@
 #include "Continent.h"
 #include "Map.h"
 #include "Hand.h"
-#include "Card.h"
 #include "Deck.h"
-#include "Attack.h"
 #include "DiceRollingPlace.h"
+#include "GameStatsObserver.h"
 
 class Country;
 class Continent;
 class Deck;
 class Map; 
-class Attack;
+class GameStatsObserver;
+class MainLoop;
 //prevent circular dependency
 
 
@@ -35,6 +35,7 @@ private:
 	std::vector<Country*> attackPossibilities;
 	DiceRollingPlace* dices;
 	Hand* hand;
+	GameStatsObserver* gameStatsObserver;
 
 public:
 	Player();
@@ -49,13 +50,15 @@ public:
 	Hand* getHand();
 	DiceRollingPlace* getDicePlace();
 	std::vector<Country*> getCountries();
-	void addArmies(int newArmies);
+	void addArmies(int);
 	void addCountry(Country* c);
 	void removeCountry(Country* c);
 	void addArmiesToCountry(int, Country*);
 	void removeArmiesFromCountry(int, Country*);
 	void showCountries();
 	std::vector<int> rollDie(int);
+	GameStatsObserver* getGameStats();
+	void saveGameStats(GameStatsObserver*);
 
 	virtual void reinforce(Map*, Deck*) = 0;
 	virtual void attack(Map*, Deck*) = 0;

@@ -130,3 +130,11 @@ void Player::showCountries() {
 int Player::getID() {
     return id;
 }
+
+void Player::saveGameStats(GameStatsObserver* gameStatsObserver) {
+    this->gameStatsObserver = gameStatsObserver;
+}
+
+GameStatsObserver* Player::getGameStats() {
+    return gameStatsObserver;
+}
