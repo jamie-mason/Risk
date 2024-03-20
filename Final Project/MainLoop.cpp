@@ -1,6 +1,15 @@
 #include "MainLoop.h"
 #include "Common.h"
 
+void MainLoop::clearScreen() {
+#ifdef _WIN32
+	std::system("cls"); // Clear the console screen on Windows
+#else
+	// Assume Unix-like system
+	std::system("clear"); // Clear the console screen on Unix-like systems
+#endif
+}
+
 MainLoop::MainLoop(std::vector<Player*> players, Map* theMap, Deck* theDeck) {
 	playerOrder = players;
 	currentMap = theMap;
@@ -23,9 +32,10 @@ Player* MainLoop::getWinner() {
 	int i = 1;
 
 	while (i < currentMap->getCountries().size()) {
-		if (currentPlayer != currentMap->getCountries()[i++]->getOwner()) {
+		if (currentPlayer != currentMap->getCountries()[i]->getOwner()) {
 			return NULL;
 		}
+		i++;
 	}
 
 	return currentPlayer;
@@ -55,26 +65,6 @@ void MainLoop::play() { // Begins the definition of the play function
         gameStatsObserver = currentPlayer->getGameStats(); // Get game statistics observer for the current player
         notify(); // Notify all observers of the game state
 
-        // Allow the current player to choose decorators for game statistics
-        if (!currentPlayer->getGameStats()->getLock()) {
-            std::cout << "\nChoose decorators:\n0: default, 1: domination, 2: hands, 3: continents,\n4: domination + hands, 5: domination + continents, 6: hands + continents,\n7: domination + hands + continents\n";
-            GameStatsObserver* playerGameStats = nullptr; // Initialize pointer to store the decorated game statistics
-            playerGameStats = new GameStatsObserver(this);
-            // Create decorator based on user selection
-
-            if (playerGameStats) {
-                currentPlayer->saveGameStats(playerGameStats); // Save the decorated game statistics
-                char doLock;
-                std::cout << "Do you wish to add/remove decorators in the future? (Y/N)\n";
-                std::cin >> doLock; // Get user input to lock or unlock game statistics
-
-                // Lock game statistics if requested by the player
-                if (toupper(doLock) == 'N') {
-                    std::cout << "Locking game stats\n";
-                    currentPlayer->getGameStats()->lock(); // Lock the game statistics
-                }
-            }
-        }
 
         // Execute the reinforcement, attack, and fortification phases for the current player
         currentPlayer->reinforce(currentMap, currentDeck);
@@ -84,7 +74,7 @@ void MainLoop::play() { // Begins the definition of the play function
         // Increment turn counter if all players have completed their turns
         if (playingIndex++ == playerOrder.size())
             turn++; // Increment the turn counter
-
+		clearScreen();
         playingIndex %= playerOrder.size(); // Ensure playingIndex wraps around to the beginning if it exceeds the number of players
     }
 
@@ -107,7 +97,6 @@ int MainLoop::playSeveral() { // Begins the definition of the playSeveral functi
 		currentPlayer->attack(currentMap, currentDeck); // Executes the attack phase for the current player
 		notifyAll(); // Notifies all observers of the game state
 		currentPlayer->fortify(currentMap, currentDeck); // Executes the fortification phase for the current player
-
 		// Checks if a full round of turns has been completed for all players
 		if (i % playerOrder.size() == playerOrder.size() - 1) {
 			turnsPerPlayer += 1; // Increments the number of turns per player
@@ -116,7 +105,9 @@ int MainLoop::playSeveral() { // Begins the definition of the playSeveral functi
 		if (turnsPerPlayer == maxNumTurns) {
 			return -1; // Returns -1 to indicate the game has reached the maximum number of turns without a winner
 		}
+		clearScreen();
 		i = (i + 1) % playerOrder.size(); // Moves to the next player in the player order
+
 	} while ((winner = getWinner()) == NULL); // Continues the loop until a winner is found
 
 	return winner->getID(); // Returns the ID of the winning player

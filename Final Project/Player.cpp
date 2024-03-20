@@ -41,12 +41,12 @@ Player::Player(std::string n, std::vector<Country*> c) {
 }
 
 // Getter for player name
-std::string Player::getName() {
+std::string Player::getName() const{
     return name;
 }
 
 // Getter for unplaced armies
-int Player::getArmies() {
+int Player::getArmies() const{
     return unplaced_armies;
 }
 
@@ -60,12 +60,12 @@ int Player::getPlacedArmies() {
 }
 
 // Getter for player's hand
-Hand* Player::getHand() {
+Hand* Player::getHand() const{
     return hand;
 }
 
 // Getter for player's dice rolling place
-DiceRollingPlace* Player::getDicePlace() {
+DiceRollingPlace* Player::getDicePlace() const{
     return dices;
 }
 
@@ -75,7 +75,7 @@ void Player::addArmies(int newArmies) {
 }
 
 // Getter for player's countries
-std::vector<Country*> Player::getCountries() {
+std::vector<Country*> Player::getCountries() const{
     return countries;
 }
 
@@ -127,7 +127,7 @@ void Player::showCountries() {
 }
 
 // Getter for player ID
-int Player::getID() {
+int Player::getID() const{
     return id;
 }
 
@@ -135,6 +135,10 @@ void Player::saveGameStats(GameStatsObserver* gameStatsObserver) {
     this->gameStatsObserver = gameStatsObserver;
 }
 
-GameStatsObserver* Player::getGameStats() {
+void Player::setName(std::string name) {
+    this->name = name;
+}
+
+GameStatsObserver* Player::getGameStats() const{
     return gameStatsObserver;
 }

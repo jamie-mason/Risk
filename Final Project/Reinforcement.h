@@ -4,6 +4,9 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <typeinfo>
+#include <sstream>
+#include <stdexcept>
 #include "Phase.h"
 class Reinforcement : public Phase {
 private:
@@ -18,6 +21,8 @@ public:
 	static void reinforceCountry(Player*, Country*, int);
 	static int calculateTotalBonusArmies(Player*, std::vector<Continent*>);
 	static void notifyObserver(Player*, std::string);
+
+	static int getUserInputInteger(std::string, int, int);
 };
 
 

@@ -43,13 +43,15 @@ public:
 	Player(std::string);
 	Player(std::string, std::vector<Country*>);
 
-	std::string getName();
-	int getArmies();
+	std::string getName() const;
+	void setName(std::string);
+
+	int getArmies() const;
 	int getPlacedArmies();
-	int getID();
-	Hand* getHand();
-	DiceRollingPlace* getDicePlace();
-	std::vector<Country*> getCountries();
+	int getID() const;
+	Hand* getHand() const;
+	DiceRollingPlace* getDicePlace() const;
+	std::vector<Country*> getCountries() const;
 	void addArmies(int);
 	void addCountry(Country* c);
 	void removeCountry(Country* c);
@@ -57,7 +59,7 @@ public:
 	void removeArmiesFromCountry(int, Country*);
 	void showCountries();
 	std::vector<int> rollDie(int);
-	GameStatsObserver* getGameStats();
+	GameStatsObserver* getGameStats() const;
 	void saveGameStats(GameStatsObserver*);
 
 	virtual void reinforce(Map*, Deck*) = 0;

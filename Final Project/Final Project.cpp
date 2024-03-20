@@ -8,38 +8,28 @@
 #include "Human.h"
 #include <filesystem>
 
-int main(int argc, char* argv[])
+
+void clearScreen() {
+#ifdef _WIN32
+	std::system("cls"); // Clear the console screen on Windows
+#else
+	// Assume Unix-like system
+	std::system("clear"); // Clear the console screen on Unix-like systems
+#endif
+}
+void GameDriver() {
+	srand(time(NULL));
+	Initialization ini;                                //initialization object
+	Startup startup(ini.getPlayers(), ini.getMap());   //startup object
+	MainLoop mainLoop(ini.getPlayers() ,ini.getMap(), ini.getDeck(), 3); //mainloop object
+	clearScreen();      //clear the screen
+	mainLoop.play();   //calls the mainloop play function
+}
+int main()
 {
+	GameDriver();  //calls the game driver function
 
-    Player* human = new Human();
-    Player* h2 = new Human();
-    std::vector<Player*> players;
-    players.push_back(human);
-    players.push_back(h2);
-    Map* currMap;
-    Deck* currDeck;
-    std::cout << "File is :" << argv[0];
-
-   Initialization ini(false);
-    currMap = ini.getMap();
-    currDeck = ini.getDeck();
-
-    for (int i = 0; i < currMap->getCountries().size(); i++) {
-        Country* currCountry = currMap->getCountries()[i];
-        currCountry->addArmies(1);
-
-        if (i % 2 == 0) {
-            currCountry->setOwner(human);
-            human->addCountry(currCountry);
-        }
-        else {
-            currCountry->setOwner(h2);
-            h2->addCountry(currCountry);
-        }
-    }
-    MainLoop mainLoop(players, currMap, currDeck, 0);
-    std::cout << "The winner is: " << mainLoop.playSeveral() << std::endl;
-    return 0;
+	return 0;    //returns the main function at 0
 }
 
 

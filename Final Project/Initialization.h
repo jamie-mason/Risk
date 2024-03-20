@@ -13,6 +13,9 @@
 #include <sys/stat.h>
 #include <limits>
 #include <algorithm>
+#include <typeinfo>
+#include <sstream>
+#include <stdexcept>
 
 class Initialization {
 private:

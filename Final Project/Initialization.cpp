@@ -3,29 +3,40 @@
 
 // Function to clear the console screen
 void Initialization::clearScreen() {
-    system("cls"); // Clears the screen
+#ifdef _WIN32
+    std::system("cls"); // Clear the console screen on Windows
+#else
+    // Assume Unix-like system
+    std::system("clear"); // Clear the console screen on Unix-like systems
+#endif
 }
 
 // Function to get an integer input from the user within a specified range
 int Initialization::getUserInputInteger(std::string output, int min, int max) {
-    int input; // Variable to store the user input integer
+    int input = 0; // Variable to store the user input integer
 
-    do {
+    while (input < min || input > max) {
         std::cout << output;
         if (!(std::cin >> input)) {
-            std::cout << "Invalid input! Must be an integer." << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            continue;
+            if (input >= INT_MIN && input <= INT_MAX) {
+                std::cout << "Invalid input! Must be an integer. Not a long Integer " << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
+            else {
+                std::cout << "Invalid input! Must be an integer." << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
         }
         if (input == -1) {
             std::cout << "Quitting..." << std::endl;
             exit(1);
         }
         if (input < min || input > max) {
-            std::cout << "Invalid input! Integer must be in the range [" << min << ", " << max << "]." << std::endl;
+            std::cout << "Invalid input! Integer must be in the range [" << min << ", " << max << "]." << std::endl<<std::endl;
         }
-    } while (input < min || input > max);
+    }
 
     return input;
 }
@@ -64,9 +75,9 @@ void Initialization::chooseMap() {
 
     std::vector<std::string> mapFiles = getAndDisplayMapOptions();
     int mapNumber = 0;
-
+    std::string* getIntegerPrompt = new std::string("Your choice (" + std::to_string(1) + " to " + std::to_string(mapFiles.size()) + " or - 1 to quit) : ");
     if (!mapFiles.empty()) {
-        mapNumber = getUserInputInteger("Your choice (-1 to quit): ", 1, mapFiles.size());
+        mapNumber = getUserInputInteger(*getIntegerPrompt, 1, mapFiles.size());
     }
     else {
         std::cerr << "No map files found. Exiting..." << std::endl;
@@ -102,6 +113,7 @@ void Initialization::chooseMap() {
     }
 
     loadedMap = map;
+    delete getIntegerPrompt;
 }
 
 std::vector<Map*> Initialization::chooseSeveralMaps() {
@@ -207,10 +219,10 @@ Deck* Initialization::getDeck() {
     return currentDeck; // Return the deck for the game
 }
 
-std::vector<Player*> Initialization::getPlayers() {
+std::vector<Player*> Initialization::getPlayers(){
     return gamePlayers; // Return the list of players for the game
 }
 
-Map* Initialization::getMap() {
+Map* Initialization::getMap(){
     return loadedMap->getMap(); // Return the loaded map for the game
 }

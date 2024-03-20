@@ -1,4 +1,6 @@
 #include "Reinforcement.h"      //References the Reinforcement header file.
+
+
 int Reinforcement::staticBonusArmies = 0;
 
 int Reinforcement::calculateCountryBonus(Player* player) {
@@ -70,11 +72,39 @@ void Reinforcement::startReinforcementPhase(Player* player) {
 	notify(player, "Reinforcement", "");
 }
 
+int Reinforcement::getUserInputInteger(std::string output, int min, int max) {
+	int input = 0; // Variable to store the user input integer
+		while (input < min || input > max) {
+			std::cout << output;
+			if (std::cin >> input) {
+				if(input < min || input > max) {
+					std::cout << "Invalid input! Integer must be in the range [" << min << ", " << max << "]." << std::endl << std::endl;
+
+					continue;
+				}
+				
+			}
+			else if(input >= INT_MIN && input <= INT_MAX){
+				std::cout << "Invalid input! Must be an integer. Not a long Integer " << std::endl;
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
+			else {
+				std::cout << "Invalid input! Must be an integer. " << std::endl;
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			}
+		}
+
+	return input;
+}
 void Reinforcement::executePlayerReinforcement(Player* player, std::vector<Continent*> continents) {
 	startReinforcementPhase(player); // Initiates the reinforcement phase for the player.
 
 	int bonusArmies = 0; // Initializes the variable to track bonus armies.
 	int temp = 0; // Temporary variable to store the previous bonus count.
+	int countryIndex = 0, armiesToAdd = 0;
+	std::string prompt, getUserInputOutput;
 
 	// Lambda function to print the bonus and update temp
 	auto printBonus = [&](const std::string& label) {
@@ -102,16 +132,11 @@ void Reinforcement::executePlayerReinforcement(Player* player, std::vector<Conti
 			std::cout << i + 1 << "\t| " << country->getName() << "\t| " << country->getArmies() << std::endl; // Display country details.
 		}
 
-		int countryIndex, armiesToAdd; // Variables to store user input for country index and armies to add.
-
+		 // Variables to store user input for country index and armies to add.
+		getUserInputOutput = "Select which country you would like to reinforce: ";
 		// Loop to get valid country index from user
-		do {
-			std::cout << "Select which country you would like to reinforce: "; // Prompt for country selection.
-			std::cin >> countryIndex; // Read user input for country index.
-			if (countryIndex < 1 || countryIndex > numberOfCountries) // Check if input is valid.
-				std::cout << "Select a valid number" << std::endl; // Display error message.
-		} while (countryIndex < 1 || countryIndex > numberOfCountries); // Repeat until valid input is provided.
-
+		countryIndex = getUserInputInteger(getUserInputOutput, 1, numberOfCountries);
+		
 		std::cout << "You have " << bonusArmies << " unplaced armies" << std::endl; // Display remaining bonus armies.
 
 		// Loop to get valid number of armies to add to the selected country
@@ -123,7 +148,7 @@ void Reinforcement::executePlayerReinforcement(Player* player, std::vector<Conti
 		} while (armiesToAdd < 0 || armiesToAdd > bonusArmies); // Repeat until valid input is provided.
 
 		auto targetCountry = player->getCountries()[countryIndex - 1]; // Get the selected country object.
-		std::string prompt = "Reinforcing " + targetCountry->getName() + "'s " +
+		prompt = "Reinforcing " + targetCountry->getName() + "'s " +
 			std::to_string(targetCountry->getArmies()) + " armies with " + std::to_string(armiesToAdd) + " armies."; // Construct reinforcement message.
 
 		notifyObserver(player, prompt); // Notify observer (likely the player) about the reinforcement.

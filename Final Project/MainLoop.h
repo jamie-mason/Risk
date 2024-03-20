@@ -20,6 +20,7 @@ private:
     int turnsPerPlayer;
     Player* getWinner();
     int maxNumTurns;
+    void clearScreen();
 
 public:
     MainLoop(std::vector<Player*>, Map*, Deck*);

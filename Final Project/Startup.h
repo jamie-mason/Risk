@@ -23,7 +23,8 @@ public:
 	void assignPlayerCountries();
 	void assignPlayerArmies();
 	void assignArmiesAI();
-	std::vector<Player*> getPlayerOrder() const;
+	std::vector<Player*> getPlayerOrder();
+	~Startup();
 };
 
 
